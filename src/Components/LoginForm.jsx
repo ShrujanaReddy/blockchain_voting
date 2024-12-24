@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,26 +11,36 @@ function Login() {
 
   const handleLogin = async (credentials) => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/users/login', { // Replace with your API URL
-        method: 'POST',
+      const response = await axios.post('http://127.0.0.1:8000/api/users/login', credentials, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials),
       });
 
-      const data = await response.json();
+      const data = response.data;
+      console.log(data);
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         setIsError(true);
         setResponseMessage(data.detail || 'Invalid email or password');
       } else {
         setIsError(false);
         setResponseMessage('Login successful! Redirecting...');
-        // Perform any additional actions on successful login, e.g., storing tokens, redirecting
-        setTimeout(() => {
-          navigate('/dashboard'); // Redirect to the desired page after login
-        }, 2000);
+
+        // Store the user data in localStorage
+        localStorage.setItem('user', JSON.stringify(data)); // Store the response data in localStorage
+
+        // Check user role and navigate
+        const parsedData = data;
+        if (parsedData.role === 'organization_admin') {
+          navigate('/admin');
+        } else if (parsedData.role === 'voter') {
+          navigate('/see_campaigns');
+        } else if (parsedData.role === 'candidate') {
+          navigate('/campaign');
+        } else {
+          navigate('/'); // Redirect to homepage if not admin
+        }
       }
     } catch (error) {
       setIsError(true);

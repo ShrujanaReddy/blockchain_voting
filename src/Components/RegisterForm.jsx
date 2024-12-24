@@ -10,6 +10,7 @@ function RegisterForm() {
     role: 'voter', // default role is 'voter'
     wallet_address: '',
   });
+  const [error, setError] = useState(null); // Track error message
   const navigate = useNavigate();
 
   // Handle input change
@@ -22,18 +23,44 @@ function RegisterForm() {
   const handleRegister = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
+    setError(null); // Reset any previous errors
+
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/users/register', formData);
-      
+      console.log('API Response:', response); // Log the API response for debugging
+
       if (response.status === 200) {
         alert(response.data.message); // Show success message
-        navigate('/login'); // Redirect to login page
+
+        // Assuming the API returns user data after registration
+        const user = response.data;
+        console.log('User data:', user); // Log user data
+
+        // Store the user details in localStorage
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Check if the role exists and navigate accordingly
+        if (user && user.role) {
+          if (user.role === 'voter') {
+            navigate('/see_campaigns');
+          } else if (user.role === 'organization_admin') {
+            navigate('/admin');
+          } else if (user.role === 'candidate') {
+            navigate('/campaign');
+          } else {
+            console.log('Unknown role, redirecting to default page');
+            navigate('/default'); // Add a fallback route
+          }
+        } else {
+          console.log('No user role found');
+        }
       }
     } catch (error) {
+      // Handle specific errors
       if (error.response && error.response.data) {
-        alert(error.response.data.detail || 'Registration failed'); // Show error message from API
+        setError(error.response.data.detail || 'Registration failed');
       } else {
-        alert('An error occurred. Please try again.'); // Handle unexpected errors
+        setError('An error occurred. Please try again.');
       }
     }
   };
@@ -41,6 +68,9 @@ function RegisterForm() {
   return (
     <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-8">
       <h2 className="text-2xl font-bold text-center text-gray-800">Register</h2>
+      
+      {error && <div className="text-red-500 text-sm text-center mt-4">{error}</div>} {/* Error message */}
+
       <form onSubmit={handleRegister} className="mt-6 space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-600">
@@ -104,21 +134,21 @@ function RegisterForm() {
             <option value="organization_admin">Organization Admin</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="wallet_address" className="block text-sm font-medium text-gray-600">
-            Wallet Address
-          </label>
-          <input
-            type="text"
-            id="wallet_address"
-            name="wallet_address"
-            value={formData.wallet_address}
-            onChange={handleChange}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter your wallet address"
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor="wallet_address" className="block text-sm font-medium text-gray-600">
+              Wallet Address
+            </label>
+            <input
+              type="text"
+              id="wallet_address"
+              name="wallet_address"
+              value={formData.wallet_address}
+              onChange={handleChange}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter your wallet address"
+              required
+            />
+          </div>
         <div>
           <button
             type="submit"

@@ -5,6 +5,8 @@ import Register from './Components/RegisterForm';
 import Admin from './Components/Admin';
 import SeeCampaign from './Components/SeeCampaign';
 import Campaign from './Components/Campaignform';
+import ApproveCandidates from './Components/ApproveCandidates';
+import ApproveVoters from './Components/ApproveVoters';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/see_campaigns" element={<SeeCampaign />} />
           <Route path="/campaign" element={<Campaign />} />
+          <Route path="/approve_voters" element={<ApproveVoters />} />
+          <Route path="/approve_candidates" element={<ApproveCandidates />} />
         </Routes>
       </div>
     </Router>

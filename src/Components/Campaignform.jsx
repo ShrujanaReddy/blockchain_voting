@@ -46,7 +46,7 @@ function Campaign() {
           },
         }
       );
-
+      console.log(response)
       setIsError(false);
       setResponseMessage('Campaign submitted successfully!');
     } catch (error) {

@@ -44,44 +44,48 @@ function SeeCampaign() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Campaigns</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 p-8">
+      <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+        Campaigns
+      </h1>
       {campaigns.length === 0 ? (
-        <p className="text-center text-gray-600">No campaigns found.</p>
+        <p className="text-center text-gray-600 text-lg">
+          No campaigns found.
+        </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {campaigns.map((campaign) => (
             <div
               key={campaign.candidate_id}
-              className="bg-white p-6 rounded-lg shadow-lg"
+              className="bg-white p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300"
             >
-              <h2 className="text-xl font-bold text-gray-800 mb-4">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4 hover:text-indigo-600">
                 {campaign.name}
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-3 text-gray-700">
                 <li>
-                  <strong>Age:</strong> {campaign.campaign.age}
+                  <strong className="font-medium">Age:</strong> {campaign.campaign.age}
                 </li>
                 <li>
-                  <strong>Gender:</strong> {campaign.campaign.gender}
+                  <strong className="font-medium">Gender:</strong> {campaign.campaign.gender}
                 </li>
                 <li>
-                  <strong>Education:</strong> {campaign.campaign.edu_background}
+                  <strong className="font-medium">Education:</strong> {campaign.campaign.edu_background}
                 </li>
                 <li>
-                  <strong>Criminal Cases:</strong> {campaign.campaign.criminal_cases}
+                  <strong className="font-medium">Criminal Cases:</strong> {campaign.campaign.criminal_cases}
                 </li>
                 <li>
-                  <strong>Goals:</strong> {campaign.campaign.goals}
+                  <strong className="font-medium">Goals:</strong> {campaign.campaign.goals}
                 </li>
                 <li>
-                  <strong>Motive:</strong> {campaign.campaign.motive}
+                  <strong className="font-medium">Motive:</strong> {campaign.campaign.motive}
                 </li>
                 <li>
-                  <strong>Plan of Action:</strong> {campaign.campaign.plan_of_action}
+                  <strong className="font-medium">Plan of Action:</strong> {campaign.campaign.plan_of_action}
                 </li>
                 <li>
-                  <strong>Slogan:</strong> {campaign.campaign.slogan}
+                  <strong className="font-medium">Slogan:</strong> {campaign.campaign.slogan}
                 </li>
               </ul>
             </div>

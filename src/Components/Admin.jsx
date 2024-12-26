@@ -26,11 +26,11 @@ function Admin() {
   };
 
   const handleApproveCandidates = () => {
-    alert('Approve Candidates clicked!');
+    navigate('/approve_candidates');
   };
 
   const handleApproveVoters = () => {
-    alert('Approve Voters clicked!');
+    navigate('/approve_voters');
   };
 
   const handleStartElection = () => {

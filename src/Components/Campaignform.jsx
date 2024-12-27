@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Campaign() {
@@ -15,7 +15,24 @@ function Campaign() {
 
   const [responseMessage, setResponseMessage] = useState('');
   const [isError, setIsError] = useState(false);
+  const [isCandidate, setIsCandidate] = useState(false);
 
+  useEffect(() => {
+    // Retrieve user data from localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      // Check if the user's role is 'candidate'
+      if (user.role === "candidate"&&user.is_approved === true) {
+        setIsCandidate(true);
+      }
+    }
+  }, []);
+
+  if (!isCandidate) {
+    // If the role is not 'candidate', don't render the component
+    return <h1 className='text-4xl'>Only approved candidates can campaign!</h1>;
+  }
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

@@ -23,7 +23,7 @@ function Campaign() {
     if (storedUser) {
       const user = JSON.parse(storedUser);
       // Check if the user's role is 'candidate'
-      if (user.role === "candidate"&&user.is_approved === true) {
+      if (user.role === "candidate") {
         setIsCandidate(true);
       }
     }

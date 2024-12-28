@@ -22,7 +22,7 @@ function Admin() {
   }, [navigate]);
 
   const handlePredictWinner = () => {
-    alert('Predict Winner clicked!');
+    navigate('/predict_winner')
   };
 
   const handleApproveCandidates = () => {

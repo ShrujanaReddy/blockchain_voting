@@ -16,7 +16,7 @@ function SeeCampaign() {
         const campaignsResponse = await axios.get('http://127.0.0.1:8000/api/candidates/campaigns', {
           headers: { 'Content-Type': 'application/json' },
         });
-
+        console.log(campaignsResponse.data)
         if (campaignsResponse.status === 200) {
           setCampaigns(campaignsResponse.data);
         } else {

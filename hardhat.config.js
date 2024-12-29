@@ -15,8 +15,6 @@ module.exports = {
       sepolia: {  // Change 'volta' to 'sepolia'
          url: API_URL,  // Ensure this points to the Sepolia endpoint
          accounts: [`0x${PRIVATE_KEY}`],
-         gas: 2100000,  // Adjust gas limit if needed
-         gasPrice: 6000000000,  // Adjust gas price if needed
       }
    },
 }

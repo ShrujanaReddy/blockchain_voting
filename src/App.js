@@ -8,7 +8,9 @@ import Campaign from './Components/Campaignform';
 import ApproveCandidates from './Components/ApproveCandidates';
 import ApproveVoters from './Components/ApproveVoters';
 import PredictWinner from './Components/PredictWinner';
-
+import Election from './Components/Election';
+import Vote from './Components/Vote';
+import Result from './Components/Result';
 function App() {
   return (
     <Router>
@@ -23,6 +25,9 @@ function App() {
           <Route path="/approve_voters" element={<ApproveVoters />} />
           <Route path="/approve_candidates" element={<ApproveCandidates />} />
           <Route path="/predict_winner" element={<PredictWinner />} />
+          <Route path="/election" element={<Election />} />
+          <Route path="/vote" element={<Vote />} />
+          <Route path="/result" element={<Result />} />
         </Routes>
       </div>
     </Router>

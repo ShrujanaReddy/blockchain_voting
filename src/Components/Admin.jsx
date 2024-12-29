@@ -34,7 +34,7 @@ function Admin() {
   };
 
   const handleStartElection = () => {
-    alert('Start Election clicked!');
+    navigate('/election')
   };
 
   return (

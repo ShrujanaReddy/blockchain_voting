@@ -59,15 +59,15 @@ function PredictWinner() {
 
   const positiveCount = sentiments.filter((s) => s === "positive").length;
   const negativeCount = sentiments.filter((s) => s === "negative").length;
-
+  const neutralCount = sentiments.filter((s) => s === "neutral").length;
   // Data for Pie Chart
   const pieData = {
-    labels: ["positive", "negative"],
+    labels: ["positive", "negative","neutral"],
     datasets: [
       {
-        data: [positiveCount, negativeCount],
-        backgroundColor: ["#4CAF50", "#FF5733"],
-        hoverBackgroundColor: ["#45A049", "#FF4D4D"],
+        data: [positiveCount, negativeCount, neutralCount],
+        backgroundColor: ["#4CAF50", "#FF5733", "#808080"],
+        hoverBackgroundColor: ["#45A049", "#FF4D4D", "#808080"],
       },
     ],
   };
